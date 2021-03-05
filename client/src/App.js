@@ -1,26 +1,37 @@
 import React, { Component } from "react";
-import SimpleStorageContract from "./contracts/SimpleStorage.json";
+import MyToken from "./contracts/MyToken.sol";
+import MyTokenSale from "./contracts/MyTokenSale.sol";
+import KycContract from "./contracts/KycContract.sol";
 import getWeb3 from "./getWeb3";
-
 import "./App.css";
 
 class App extends Component {
-  state = { storageValue: 0, web3: null, accounts: null, contract: null };
+  state = { loaded: false };
 
   componentDidMount = async () => {
     try {
       // Get network provider and web3 instance.
-      const web3 = await getWeb3();
+      this.web3 = await getWeb3();
 
       // Use web3 to get the user's accounts.
-      const accounts = await web3.eth.getAccounts();
+      this.accounts = await web3.eth.getAccounts();
 
       // Get the contract instance.
-      const networkId = await web3.eth.net.getId();
-      const deployedNetwork = SimpleStorageContract.networks[networkId];
-      const instance = new web3.eth.Contract(
-        SimpleStorageContract.abi,
-        deployedNetwork && deployedNetwork.address,
+      this.networkId = await web3.eth.net.getId();
+
+      this.myToken = new web3.eth(Contract
+        MyToken.abi,
+        MyToken.networks[this.networkId] && MyToken.networks[this.networkId].address,
+      );
+
+      this.myTokenSale = new web3.eth(Contract
+        MyTokenSale.abi,
+        MyTokenSale.networks[this.networkId] && MyTokenSale.networks[this.networkId].address,
+      );
+
+      this.myToken = new web3.eth(Contract
+        KycContract.abi,
+        KycContract.networks[this.networkId] && KycContract.networks[this.networkId].address,
       );
 
       // Set web3, accounts, and contract to the state, and then proceed with an
@@ -49,7 +60,7 @@ class App extends Component {
   };
 
   render() {
-    if (!this.state.web3) {
+    if (!this.state.loaded) {
       return <div>Loading Web3, accounts, and contract...</div>;
     }
     return (
