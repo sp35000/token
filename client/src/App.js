@@ -19,17 +19,17 @@ class App extends Component {
       // Get the contract instance.
       this.networkId = await web3.eth.net.getId();
 
-      this.myToken = new web3.eth(Contract
+      this.myToken = new this.web3.eth.Contract(
         MyToken.abi,
         MyToken.networks[this.networkId] && MyToken.networks[this.networkId].address,
       );
 
-      this.myTokenSale = new web3.eth(Contract
+      this.myTokenSale = new this.web3.eth.Contract(
         MyTokenSale.abi,
         MyTokenSale.networks[this.networkId] && MyTokenSale.networks[this.networkId].address,
       );
 
-      this.myToken = new web3.eth(Contract
+      this.KycContract = new this.web3.eth.Contract(
         KycContract.abi,
         KycContract.networks[this.networkId] && KycContract.networks[this.networkId].address,
       );

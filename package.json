@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "@openzeppelin/contracts": "^3.0.0",
+    "chai": "^4.3.3",
+    "chai-as-promised": "^7.1.1",
+    "chai-bn": "^0.2.1",
+    "dotenv": "^8.2.0",
+    "react-scripts": "^4.0.3"
+  }
+}
