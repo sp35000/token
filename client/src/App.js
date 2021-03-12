@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import MyToken from "./contracts/MyToken.sol";
-import MyTokenSale from "./contracts/MyTokenSale.sol";
-import KycContract from "./contracts/KycContract.sol";
+import MyToken from "./contracts/MyToken.json";
+import MyTokenSale from "./contracts/MyTokenSale.json";
+import KycContract from "./contracts/KycContract.json";
 import getWeb3 from "./getWeb3";
 import "./App.css";
 
@@ -29,7 +29,7 @@ class App extends Component {
         MyTokenSale.networks[this.networkId] && MyTokenSale.networks[this.networkId].address,
       );
 
-      this.KycContract = new this.web3.eth.Contract(
+      this.kycContract = new this.web3.eth.Contract(
         KycContract.abi,
         KycContract.networks[this.networkId] && KycContract.networks[this.networkId].address,
       );
